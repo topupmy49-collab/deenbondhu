@@ -1,144 +1,216 @@
 <!DOCTYPE html>
-<html lang="bn" dir="ltr">
+<html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DeenBondhu BD — দ্বীনবন্ধু বিডি</title>
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#174A35">
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeenBondhu BD - দ্বীনবন্ধু বিডি</title>
+    
+    <!-- PWA & Theme Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#174A35">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Top Header -->
-  <header>
-    <div class="brand">
-      <div class="logo-icon">দ্ব</div>
-      <div class="brand-title">
-        <h1 data-i18n="appTitle">দ্বীনবন্ধু বিডি</h1>
-        <span data-i18n="tagline">প্রতিদিনের জীবনে দ্বীনের সঙ্গী</span>
-      </div>
-    </div>
-    <div class="header-actions">
-      <button class="icon-btn" onclick="toggleLanguage()" title="Language">🌐</button>
-    </div>
-  </header>
-
-  <!-- Main View Area -->
-  <main>
-    <!-- 1. Home View -->
-    <section id="view-home" class="view active">
-      <div id="home-content">
-        <!-- Rendered via app.js -->
-      </div>
-    </section>
-
-    <!-- 2. Quran View -->
-    <section id="view-quran" class="view">
-      <div class="card">
-        <h3 class="card-title" data-i18n="quran">আল-কুরআনুল কারীম</h3>
-        <input type="text" class="input-field" placeholder="সূরা খুঁজুন..." oninput="filterSurahs(this.value)">
-      </div>
-      <div id="surah-list-container" class="list-group">
-        <!-- Surah items loaded dynamically -->
-      </div>
-    </section>
-
-    <!-- 3. Duas View -->
-    <section id="view-duas" class="view">
-      <div class="card">
-        <h3 class="card-title" data-i18n="duas">দৈনন্দিন দুআ ও জিকির</h3>
-        <input type="text" class="input-field" data-i18n-placeholder="searchPlaceholder" placeholder="দুআ খুঁজুন...">
-      </div>
-      <div class="list-group">
-        <div class="list-row" onclick="alert('ঘুম থেকে ওঠার দুআ: আলহামদুলিল্লাহিল্লাযী আহইয়ানা বাদা মা আমাতানা ওয়া ইলাইহিন নুশুর।')">
-          <div>
-            <strong>১. ঘুম থেকে জাগরণের দুআ</strong><br>
-            <small style="color: var(--text-muted);">সকাল ও ঘুম সম্পর্কিত</small>
-          </div>
-          <span style="color: var(--gold);">←</span>
+    <!-- App Header -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="app-logo">
+                <img src="icon-192.png" alt="DeenBondhu Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+            </div>
+            <div class="header-title">
+                <h1>দ্বীনবন্ধু বিডি</h1>
+                <p>প্রতিদিনের জীবনে দ্বীনের সঙ্গী</p>
+            </div>
+            <button class="settings-btn" id="header-settings-btn" aria-label="Settings">
+                🌐
+            </button>
         </div>
-        <div class="list-row" onclick="alert('খাওয়ার শুরুর দুআ: বিসমিল্লাহ ওয়া আলা বারাকাতিল্লাহ।')">
-          <div>
-            <strong>২. খাবার গ্রহণের দুআ</strong><br>
-            <small style="color: var(--text-muted);">খাদ্য ও পানীয়</small>
-          </div>
-          <span style="color: var(--gold);">←</span>
-        </div>
-        <div class="list-row" onclick="alert('ঘর থেকে বের হওয়ার দুআ: বিসমিল্লাহি তাওয়াক্কালতু আলাল্লাহ...')">
-          <div>
-            <strong>৩. ঘর থেকে বের হওয়ার দুআ</strong><br>
-            <small style="color: var(--text-muted);">যাত্রা ও ভ্রমণ</small>
-          </div>
-          <span style="color: var(--gold);">←</span>
-        </div>
-      </div>
-    </section>
+    </header>
 
-    <!-- 4. Tasbih View -->
-    <section id="view-tasbih" class="view">
-      <div class="card tasbih-display">
-        <h3 class="card-title" style="justify-content: center;" data-i18n="tasbih">ডিজিটাল তাসবিহ</h3>
-        <p style="color: var(--text-muted); margin-bottom: 10px;">সুবহানাল্লাহ, আলহামদুলিল্লাহ, আল্লাহু আকবার</p>
-        <div id="tasbih-counter-display" class="tasbih-count">0</div>
-        <button class="tasbih-circle-btn" onclick="incrementTasbih()">গণনা</button>
-        <button class="btn" style="margin-top: 20px; background: transparent; border-color: var(--danger); color: var(--danger);" onclick="resetTasbih()">রিসেট করুন</button>
-      </div>
-    </section>
+    <!-- Main Content Body -->
+    <main class="main-content">
+        
+        <!-- Home Tab Content -->
+        <section id="home-tab" class="tab-content active">
+            
+            <!-- Hero Card -->
+            <div class="hero-card">
+                <div class="hero-bg-overlay"></div>
+                <div class="hero-text">
+                    <h2>দ্বীনবন্ধু বিডি</h2>
+                    <p>প্রতিদিনের জীবনে দ্বীনের সঙ্গী</p>
+                </div>
+            </div>
 
-    <!-- 5. Tools / Settings View -->
-    <section id="view-tools" class="view">
-      <div class="card">
-        <h3 class="card-title">🧭 কিবলা ও অন্যান্য টুলস</h3>
-        <button class="btn mb-2" onclick="alert('আপনার ডিভাইসের জিপিএস ও কম্পাস সেন্সর ব্যবহার করে কিবলা দিক নির্ণয় করা হচ্ছে।')">কিবলা কম্পাস চালু করুন</button>
-        <button class="btn mb-2" onclick="alert('আল্লাহর ৯৯ নাম (আসমাউল হুসনা) শীঘ্রই সম্পূর্ণ তালিকা সহ যুক্ত হচ্ছে।')">আল্লাহর ৯৯ নাম</button>
-        <button class="btn mb-2" onclick="alert('নামাজ শিক্ষা ও ওজু-গোসলের নিয়মাবলী গাইড।')">নামাজ ও ওজু শিক্ষা</button>
-        <button class="btn" onclick="alert('ফ্যামিলি মোড ও চাইল্ড সেফটি গাইড।')">ফ্যামিলি ও কিডস মোড</button>
-      </div>
-      <div class="card">
-        <h3 class="card-title" data-i18n="settings">অ্যাপ সেটিংস</h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">বর্তমান ভাষা: <span id="current-lang-label">বাংলা</span></p>
-        <button class="btn" onclick="toggleLanguage()">ভাষা পরিবর্তন করুন (Change Language)</button>
-      </div>
-    </section>
-  </main>
+            <!-- Date Banner -->
+            <div class="date-banner">
+                <div class="date-item">
+                    <span>তারিখ: </span><strong id="gregorian-date">লোড হচ্ছে...</strong>
+                </div>
+                <div class="date-item">
+                    <span>হিিজরি: </span><strong id="hijri-date">লোড হচ্ছে...</strong>
+                </div>
+            </div>
 
-  <!-- Bottom Navigation Bar -->
-  <nav class="bottom-nav">
-    <button class="nav-item active" data-view="home">
-      <span>🏠</span>
-      <span data-i18n="home">হোম</span>
-    </button>
-    <button class="nav-item" data-view="quran">
-      <span>📖</span>
-      <span data-i18n="quran">আল-কুরআন</span>
-    </button>
-    <button class="nav-item" data-view="duas">
-      <span>🤲</span>
-      <span data-i18n="duas">দুআ</span>
-    </button>
-    <button class="nav-item" data-view="tasbih">
-      <span>📿</span>
-      <span data-i18n="tasbih">তাসবিহ</span>
-    </button>
-    <button class="nav-item" data-view="tools">
-      <span>⚙️</span>
-      <span data-i18n="settings">সেটিংস</span>
-    </button>
-  </nav>
+            <!-- Prayer Times Card -->
+            <div class="card prayer-card">
+                <div class="card-header">
+                    <span class="location-tag">📍 <span id="current-location">Dhaka, বাংলাদেশ</span></span>
+                    <button class="btn-sm" id="change-city-btn">শহর পরিবর্তন</button>
+                </div>
+                
+                <div class="prayer-list">
+                    <div class="prayer-row" id="fajr-row">
+                        <span class="prayer-name">ফজর</span>
+                        <span class="prayer-time" id="fajr-time">--:--</span>
+                    </div>
+                    <div class="prayer-row" id="dhuhr-row">
+                        <span class="prayer-name">যোহর</span>
+                        <span class="prayer-time" id="dhuhr-time">--:--</span>
+                    </div>
+                    <div class="prayer-row" id="asr-row">
+                        <span class="prayer-name">আসর</span>
+                        <span class="prayer-time" id="asr-time">--:--</span>
+                    </div>
+                    <div class="prayer-row" id="maghrib-row">
+                        <span class="prayer-name">মাগরিব</span>
+                        <span class="prayer-time" id="maghrib-time">--:--</span>
+                    </div>
+                    <div class="prayer-row" id="isha-row">
+                        <span class="prayer-name">এশা</span>
+                        <span class="prayer-time" id="isha-time">--:--</span>
+                    </div>
+                </div>
+            </div>
 
-  <script src="app.js"></script>
-  <script>
-    function toggleLanguage() {
-      State.language = State.language === 'bn' ? 'en' : 'bn';
-      localStorage.setItem('db_lang', State.language);
-      updateUIStrings();
-      document.getElementById('current-lang-label').textContent = State.language === 'bn' ? 'বাংলা' : 'English';
-      renderHome();
-    }
-    // Sync initial tasbih view
-    document.getElementById('tasbih-counter-display').textContent = State.tasbihCount;
-  </script>
+            <!-- Quick Action Grid -->
+            <div class="grid-actions">
+                <button class="grid-card" onclick="switchTab('quran-tab')">
+                    <div class="grid-icon">📖</div>
+                    <span>আল-কুরআন</span>
+                </button>
+                <button class="grid-card" onclick="switchTab('dua-tab')">
+                    <div class="grid-icon">🤲</div>
+                    <span>দুআ সমূহ</span>
+                </button>
+                <button class="grid-card" onclick="switchTab('tasbih-tab')">
+                    <div class="grid-icon">📿</div>
+                    <span>তাসবিহ</span>
+                </button>
+                <button class="grid-card" onclick="switchTab('settings-tab')">
+                    <div class="grid-icon">🧩</div>
+                    <span>অন্যান্য</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Quran Tab Content -->
+        <section id="quran-tab" class="tab-content">
+            <div class="card">
+                <div class="card-title">
+                    <h2>আল-কুরআনুল কারীম</h2>
+                    <p>সূরা নির্বাচন করুন</p>
+                </div>
+                <div class="surah-list" id="surah-container">
+                    <p class="loading-text">সূরা তালিকা লোড হচ্ছে...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dua Tab Content -->
+        <section id="dua-tab" class="tab-content">
+            <div class="card">
+                <div class="card-title">
+                    <h2>দৈনন্দিন প্রয়োজনীয় দুআ</h2>
+                </div>
+                <div class="dua-list">
+                    <div class="dua-card">
+                        <h3>ঘুম থেকে ওঠার পর দুআ</h3>
+                        <p class="arabic-text">الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ</p>
+                        <p class="bangla-trans">আলহামদু লিল্লাহিল্লাজী আহইয়ানা বা’দা মা আমাতানা ওয়া ইলাইহিন নুশূর।</p>
+                        <p class="bangla-meaning">অর্থ: সমস্ত প্রশংসা আল্লাহর জন্য, যিনি আমাদেরকে মৃত্যুর (ঘুমের) পর জীবিত করলেন এবং তাঁর দিকেই আমাদের ফিরে যেতে হবে।</p>
+                    </div>
+                    <div class="dua-card">
+                        <h3>ঘুমোতে যাওয়ার আগে দুআ</h3>
+                        <p class="arabic-text">بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا</p>
+                        <p class="bangla-trans">বিস্মিকা আল্লাহুম্মা আমূতু ওয়া আহইয়া।</p>
+                        <p class="bangla-meaning">অর্থ: হে আল্লাহ! আপনার নাম নিয়েই আমি মরছি (ঘুমাচ্ছি) এবং জীবিত হচ্ছি (জাগছি)।</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tasbih Tab Content -->
+        <section id="tasbih-tab" class="tab-content">
+            <div class="card tasbih-card">
+                <h2>ডিজিটাল তাসবিহ Counter</h2>
+                <div class="tasbih-display">
+                    <span id="tasbih-count">0</span>
+                </div>
+                <div class="tasbih-controls">
+                    <button class="btn-tasbih" id="tasbih-btn">গণনা করুন</button>
+                    <button class="btn-reset" id="tasbih-reset-btn">রিসেট</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Settings Tab Content -->
+        <section id="settings-tab" class="tab-content">
+            <div class="card">
+                <h2>অ্যাপ সেটিংস</h2>
+                <div class="setting-item">
+                    <label for="city-select">আপনার শহর নির্বাচন করুন:</label>
+                    <select id="city-select">
+                        <option value="Dhaka">ঢাকা (Dhaka)</option>
+                        <option value="Chittagong">চট্টগ্রাম (Chittagong)</option>
+                        <option value="Sylhet">সিলেট (Sylhet)</option>
+                        <option value="Rajshahi">রাজশাহী (Rajshahi)</option>
+                        <option value="Khulna">খুলনা (Khulna)</option>
+                        <option value="Barisal">বরিশাল (Barisal)</option>
+                        <option value="Rangpur">রংপুর (Rangpur)</option>
+                        <option value="Mymensingh">ময়মনসিংহ (Mymensingh)</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" data-tab="home-tab">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">হোম</span>
+        </button>
+        <button class="nav-item" data-tab="quran-tab">
+            <span class="nav-icon">📖</span>
+            <span class="nav-label">আল-কুরআন</span>
+        </button>
+        <button class="nav-item" data-tab="dua-tab">
+            <span class="nav-icon">🤲</span>
+            <span class="nav-label">দুআ সমূহ</span>
+        </button>
+        <button class="nav-item" data-tab="tasbih-tab">
+            <span class="nav-icon">📿</span>
+            <span class="nav-label">তাসবিহ</span>
+        </button>
+        <button class="nav-item" data-tab="settings-tab">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label">সেটিংস</span>
+        </button>
+    </nav>
+
+    <!-- JavaScript Link -->
+    <script src="app.js"></script>
+    <script src="sw.js"></script>
 </body>
 </html>
